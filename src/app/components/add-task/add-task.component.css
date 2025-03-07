@@ -1,0 +1,7 @@
+.add-form {
+    margin-bottom: 40px;
+}
+
+button:disabled {
+    background-color: gray;
+}

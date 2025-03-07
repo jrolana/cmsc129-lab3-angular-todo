@@ -1,0 +1,22 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="add-form">
+    <div class="form-control">
+        <label for="text">Text </label>
+        <input id="text" type="text" formControlName="text" placeholder="Add Task">
+    </div>
+    <div class="form-control">
+        <label for="dueDate">Date & Time </label>
+        <input id="dueDate" type="datetime-local" formControlName="dueDate" min="2025-07-03T00:00">
+    </div>
+
+    <div class="div form-control">
+        <label for="priority">Priority </label>
+        <select name="priority" id="priority" formControlName="priority">
+            <option value="" disabled>Select a priority (Optional)</option>
+            <option value="1">High</option>
+            <option value="2">Mid</option>
+            <option value="3">Low</option>
+        </select>
+    </div>
+
+    <button type="submit" [disabled]="!taskForm.valid" class="btn btn-block">Save Task</button>
+</form>
