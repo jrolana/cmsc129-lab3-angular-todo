@@ -1,22 +1,18 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "text": "Doctors Appointment",
-      "dueDate": "May 5th at 2:30pm",
-      "priority": "3"
-    },
-    {
-      "id": "6a2e",
-      "text": "TAsk 112",
-      "dueDate": "2003-12-01T12:00",
-      "priority": "3"
-    },
-    {
-      "id": "d4c2",
+      "id": "e86d",
       "text": "Task 1",
-      "dueDate": "2003-02-02T12:00",
-      "priority": ""
+      "dueDate": "2025-03-11T13:59",
+      "priority": "",
+      "isDone": false
+    },
+    {
+      "id": "35f6",
+      "text": "Task 2",
+      "dueDate": "2025-03-11T13:00",
+      "priority": "1",
+      "isDone": false
     }
   ]
 }

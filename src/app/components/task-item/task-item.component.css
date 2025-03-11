@@ -3,10 +3,9 @@
   margin: 5px;
   padding: 10px 20px;
   cursor: pointer;
-}
-
-.task.reminder {
-  border-left: 5px solid green;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  align-items: center;
 }
 
 .task.high {
@@ -23,6 +22,18 @@
 
 .task h3 {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+}
+
+.task.done {
+  opacity: 0.5;
+
+  h3 {
+    text-decoration: line-through;
+  }
+}
+
+.task input {
+  width: 20px;
+  height: 20px;
 }

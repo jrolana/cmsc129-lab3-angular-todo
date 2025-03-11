@@ -5,6 +5,7 @@ export interface Task {
     text: string,
     dueDate: string,
     priority: string,
+    isDone: boolean,
 }
 
 type ToFormControls<T> = {

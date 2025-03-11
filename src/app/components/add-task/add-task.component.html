@@ -5,7 +5,7 @@
     </div>
     <div class="form-control">
         <label for="dueDate">Date & Time </label>
-        <input id="dueDate" type="datetime-local" formControlName="dueDate" min="2025-07-03T00:00">
+        <input id="dueDate" type="datetime-local" formControlName="dueDate" min="{{getMinDate()}}">
     </div>
 
     <div class="div form-control">
@@ -18,5 +18,6 @@
         </select>
     </div>
 
+    <!-- <p>{{taskForm.status}}</p> -->
     <button type="submit" [disabled]="!taskForm.valid" class="btn btn-block">Save Task</button>
 </form>

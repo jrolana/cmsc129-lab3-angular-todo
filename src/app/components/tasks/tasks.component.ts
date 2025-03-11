@@ -14,6 +14,7 @@ import { AddTaskComponent } from "../add-task/add-task.component";
 })
 export class TasksComponent {
   tasks: Task[] = TASKS;
+  isDone: boolean = false;
 
   constructor(private readonly taskService: TaskService) {
     this.taskService.getTasks().subscribe((tasks) =>
@@ -26,5 +27,9 @@ export class TasksComponent {
 
   addTask(task: Task) {
     this.taskService.addTask(task).subscribe((task) => this.tasks.push(task));
+  }
+
+  toggleDone(task: Task) {
+    this.taskService.toggleDone(task).subscribe();
   }
 }
