@@ -5,3 +5,7 @@
 button:disabled {
     background-color: gray;
 }
+
+.error {
+    color: red;
+}

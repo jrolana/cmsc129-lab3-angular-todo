@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {
   FormGroup, FormControl, ReactiveFormsModule, AbstractControl,
@@ -9,33 +9,40 @@ import { UiService } from '../../services/ui.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-add-task',
+  selector: 'app-task-form',
   standalone: true,
   imports: [ReactiveFormsModule],
   providers: [DatePipe],
-  templateUrl: './add-task.component.html',
-  styleUrl: './add-task.component.css',
+  templateUrl: './task-form.component.html',
+  styleUrl: './task-form.component.css',
 
 })
 
-export class AddTaskComponent {
+export class TaskFormComponent {
   @Output() onAddTask = new EventEmitter<Task>();
-  showAddTask: boolean = false;
+  @Output() onEditTask = new EventEmitter<Task>();
+  showAddForm: boolean = false;
   subscription: Subscription;
-  @Input() textVal = '';
-  @Input() dueDateVal = '';
+
+  @Input() isEditForm: boolean = false;
+  @Input() id: any;
+  @Input() dateAdded: any;
+  @Input() textVal: any;
+
+  hasTextError: boolean = false;
+  hasDueDateError: boolean = false;
 
   taskForm = new FormGroup<TaskForm>({
-    text: new FormControl(this.textVal, { nonNullable: true, validators: Validators.required }),
-    dueDate: new FormControl(this.dueDateVal, { nonNullable: true, validators: [Validators.required, this.dueDateValidator()] }),
-    priority: new FormControl("", { nonNullable: true }),
+    text: new FormControl("", { nonNullable: true, validators: Validators.required }),
+    dueDate: new FormControl("", { nonNullable: true, validators: [Validators.required, this.dueDateValidator()] }),
+    priority: new FormControl("1", { nonNullable: true }),
     isDone: new FormControl(false, { nonNullable: true }),
     dateAdded: new FormControl(this.datePipe.transform(new Date(), "yyyy-MM-ddThh:mm")!,
       { nonNullable: true }),
   })
 
   constructor(private readonly datePipe: DatePipe, private readonly uiService: UiService) {
-    this.subscription = this.uiService.onToggle().subscribe(value => this.showAddTask = value);
+    this.subscription = this.uiService.onToggleAddTask().subscribe(value => this.showAddForm = value);
   }
 
   dueDateValidator(): ValidatorFn {
@@ -44,7 +51,6 @@ export class AddTaskComponent {
       const dateFormat = /\d{4}-(0[1-9]|1[1-2])-(0[1-9]|1[1-2]|3[0-1])T\d{2}:\d{2}/;
       let isValid = dateFormat.test(date);
 
-      // @TODO: Distinguish between AM and PM
       if (date < this.getMinDate()!) {
         isValid = false;
       }
@@ -66,16 +72,37 @@ export class AddTaskComponent {
   }
 
   onSubmit() {
+    if (this.taskForm.controls['text'].errors) {
+      this.hasTextError = true;
+    }
+
+    if (this.taskForm.controls['dueDate'].errors) {
+      this.hasDueDateError = true;
+    }
+
+    if (this.hasDueDateError || this.hasTextError) {
+      return;
+    }
+
     const newTask = this.taskForm.getRawValue();
 
-    this.onAddTask.emit(newTask);
+    if (this.id != null) {
+      newTask["id"] = this.id;
+    }
 
-    this.taskForm.patchValue({
-      text: '',
-      dueDate: '',
-      priority: '',
-      isDone: false,
-    });
+    if (this.dateAdded != null) {
+      newTask["dateAdded"] = this.dateAdded;
+    }
 
+    this.isEditForm ? this.onEditTask.emit(newTask) : this.onAddTask.emit(newTask);
+
+    if (!this.hasDueDateError && !this.hasTextError) {
+      this.taskForm.patchValue({
+        text: '',
+        dueDate: '',
+        priority: '',
+        isDone: false,
+      });
+    }
   }
 }

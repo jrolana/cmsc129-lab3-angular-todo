@@ -1,14 +1,15 @@
-import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../model/Task';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { faTimes, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
+import { TaskFormComponent } from '../task-form/task-form.component';
 
 @Component({
   selector: 'app-task-item',
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule, FormsModule],
+  imports: [FontAwesomeModule, CommonModule, FormsModule, TaskFormComponent],
   templateUrl: './task-item.component.html',
   styleUrl: './task-item.component.css'
 })
@@ -22,11 +23,16 @@ export class TaskItemComponent {
     isDone: false,
     dateAdded: '',
   };
+  isDone: boolean = false;
 
   @Output() onDeleteTask = new EventEmitter<Task>();
   @Output() onEditTask = new EventEmitter<Task>();
   @Output() onDoneTask = new EventEmitter<Task>();
-  isDone: boolean = false;
+
+  @Input() showEditForm: boolean = false;
+
+  constructor() {
+  }
 
   getPriority(task: Task) {
     const prio: number = parseInt(task.priority);
@@ -55,9 +61,12 @@ export class TaskItemComponent {
     this.onEditTask.emit(task);
   }
 
+  toggleShowEditForm(task: Task) {
+    this.showEditForm = !this.showEditForm;
+  }
+
   onToggleDone(task: Task) {
     task.isDone = this.isDone;
     this.onDoneTask.emit(task);
   }
-
 }

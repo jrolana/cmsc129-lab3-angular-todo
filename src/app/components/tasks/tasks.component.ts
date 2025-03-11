@@ -3,12 +3,12 @@ import { Task } from '../../model/Task';
 import { TASKS } from '../../model/mock-tasks';
 import { TaskItemComponent } from "../task-item/task-item.component";
 import { TaskService } from '../../services/task.service';
-import { AddTaskComponent } from "../add-task/add-task.component";
+import { TaskFormComponent } from "../task-form/task-form.component";
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskItemComponent, AddTaskComponent],
+  imports: [TaskItemComponent, TaskFormComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
@@ -26,7 +26,14 @@ export class TasksComponent {
   }
 
   editTask(task: Task) {
-    this.taskService.deleteTask(task).subscribe();
+    this.taskService.editTask(task).subscribe(() => {
+      for (let i = 0; i < this.tasks.length; i++) {
+        if (this.tasks[i].id == task.id) {
+          this.tasks[i] = task;
+          break;
+        }
+      }
+    });
   }
 
   addTask(task: Task) {
@@ -34,6 +41,6 @@ export class TasksComponent {
   }
 
   toggleDone(task: Task) {
-    this.taskService.toggleDone(task).subscribe();
+    this.taskService.editTask(task).subscribe();
   }
 }

@@ -11,14 +11,14 @@ import { UiService } from '../../services/ui.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  showAddTask: boolean = false;
+  showAddForm: boolean = false;
   subscription: Subscription;
 
   constructor(private readonly uiService: UiService) {
-    this.subscription = this.uiService.onToggle().subscribe(value => this.showAddTask = value);
+    this.subscription = this.uiService.onToggleAddTask().subscribe(value => this.showAddForm = value);
   }
 
-  toggleShowAddTask() {
-    this.uiService.toggleAddTask();
+  toggleshowTaskForm() {
+    this.uiService.toggleShowTaskForm();
   }
 }

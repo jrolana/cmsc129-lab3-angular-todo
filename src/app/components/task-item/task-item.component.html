@@ -1,5 +1,5 @@
 <div class="task" [ngClass]="getPriority(task)" [class.done]="task.isDone">
-    <input type="checkbox" [(ngModel)]="isDone" (change)="onToggleDone(task)">
+    <input type="checkbox" [(ngModel)]="isDone" (change)="onToggleDone(task)" [checked]="task.isDone">
     <div>
         <h3>{{task.text}}
 
@@ -7,7 +7,12 @@
         <p>{{task.dueDate | date: "MMM dd, yyyy 'at' hh:mm a"}}</p>
     </div>
     <div class="edit">
-        <fa-icon [icon]="faPenToSquare" (click)="onEdit(task)"></fa-icon>
+        <fa-icon [icon]="faPenToSquare" (click)="toggleShowEditForm(task)"></fa-icon>
         <fa-icon [icon]="faTimes" [ngStyle]="{'color': 'red'}" (click)="onDelete(task)"></fa-icon>
     </div>
 </div>
+
+@if (showEditForm) {
+<app-task-form [isEditForm]="true" [id]="task.id" [textVal]="task.text" [dateAdded]="task.dateAdded"
+    (onEditTask)="onEdit($event)"></app-task-form>
+}
