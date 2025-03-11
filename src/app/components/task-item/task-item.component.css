@@ -4,7 +4,7 @@
   padding: 10px 20px;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 0.5fr 5fr 0.5fr;
   align-items: center;
 }
 
@@ -36,4 +36,9 @@
 .task input {
   width: 20px;
   height: 20px;
+}
+
+.edit {
+  display: flex;
+  flex-direction: column;
 }

@@ -7,6 +7,7 @@ export const TASKS: Task[] = [
         dueDate: 'May 5th at 2: 30pm',
         priority: '1',
         isDone: false,
+        dateAdded: 'May 6th at 1: 30pm',
     },
     {
         id: 2,
@@ -14,7 +15,7 @@ export const TASKS: Task[] = [
         dueDate: 'May 6th at 1: 30pm',
         priority: '2',
         isDone: false,
-
+        dateAdded: 'May 6th at 1: 30pm',
     },
     {
         id: 3,
@@ -22,5 +23,6 @@ export const TASKS: Task[] = [
         dueDate: 'May 7th at 12: 30pm',
         priority: '3',
         isDone: false,
+        dateAdded: 'May 6th at 1: 30pm',
     },
 ];

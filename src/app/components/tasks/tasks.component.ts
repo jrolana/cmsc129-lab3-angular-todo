@@ -25,6 +25,10 @@ export class TasksComponent {
     this.taskService.deleteTask(task).subscribe(() => (this.tasks = this.tasks.filter((t) => t.id !== task.id)));
   }
 
+  editTask(task: Task) {
+    this.taskService.deleteTask(task).subscribe();
+  }
+
   addTask(task: Task) {
     this.taskService.addTask(task).subscribe((task) => this.tasks.push(task));
   }

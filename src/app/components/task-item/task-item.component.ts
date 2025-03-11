@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core
 import { Task } from '../../model/Task';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -14,21 +14,19 @@ import { FormsModule } from '@angular/forms';
 })
 export class TaskItemComponent {
   faTimes = faTimes;
-  @Input({ required: true }) task: Task;
+  faPenToSquare = faPenToSquare;
+  @Input({ required: true }) task: Task = {
+    text: '',
+    dueDate: '',
+    priority: '',
+    isDone: false,
+    dateAdded: '',
+  };
+
   @Output() onDeleteTask = new EventEmitter<Task>();
+  @Output() onEditTask = new EventEmitter<Task>();
   @Output() onDoneTask = new EventEmitter<Task>();
   isDone: boolean = false;
-
-  constructor() {
-    this.task = {
-      text: "",
-      dueDate: "",
-      priority: "",
-      isDone: false,
-    }
-
-  }
-
 
   getPriority(task: Task) {
     const prio: number = parseInt(task.priority);
@@ -53,11 +51,12 @@ export class TaskItemComponent {
     this.onDeleteTask.emit(task);
   }
 
+  onEdit(task: Task) {
+    this.onEditTask.emit(task);
+  }
+
   onToggleDone(task: Task) {
-    console.log(this.isDone);
-
     task.isDone = this.isDone;
-
     this.onDoneTask.emit(task);
   }
 

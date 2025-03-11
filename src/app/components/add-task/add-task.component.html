@@ -1,23 +1,23 @@
+@if (showAddTask) {
 <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="add-form">
     <div class="form-control">
         <label for="text">Text </label>
-        <input id="text" type="text" formControlName="text" placeholder="Add Task">
+        <input id="text" type="text" formControlName="text" placeholder="Add Task" [value]="{textVal}">
     </div>
     <div class="form-control">
         <label for="dueDate">Date & Time </label>
-        <input id="dueDate" type="datetime-local" formControlName="dueDate" min="{{getMinDate()}}">
+        <input id="dueDate" type="datetime-local" formControlName="dueDate" min="{{getMinDate()}}"
+            [value]="{dueDateVal}">
     </div>
-
     <div class="div form-control">
         <label for="priority">Priority </label>
         <select name="priority" id="priority" formControlName="priority">
-            <option value="" disabled>Select a priority (Optional)</option>
-            <option value="1">High</option>
+            <option value="1" [selected]="true">High</option>
             <option value="2">Mid</option>
             <option value="3">Low</option>
         </select>
     </div>
 
-    <!-- <p>{{taskForm.status}}</p> -->
     <button type="submit" [disabled]="!taskForm.valid" class="btn btn-block">Save Task</button>
 </form>
+}
