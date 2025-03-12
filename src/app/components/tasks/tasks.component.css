@@ -1,0 +1,9 @@
+.empty {
+    line-height: 150px;
+    text-align: center;
+    margin: auto;
+}
+
+.hidden {
+    display: none;
+}

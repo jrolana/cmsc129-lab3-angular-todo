@@ -5,20 +5,26 @@
         <label for="text">Text </label>
         <input id="text" type="text" formControlName="text"
             placeholder="{{isEditForm ? textVal : 'Please enter task'}}">
-        @if (this.hasTextError) {
+        @if(this.taskForm.controls['text'].invalid && (this.taskForm.controls['text'].dirty ||
+        this.taskForm.controls['text'].touched)) {
+        @if (this.taskForm.controls['text'].errors) {
         <div class="error">
             Please enter a task
         </div>
+        }
         }
     </div>
 
     <div class="form-control">
         <label for="dueDate">Date & Time </label>
         <input id="dueDate" type="datetime-local" formControlName="dueDate" min="{{getMinDate()}}">
-        @if (this.hasDueDateError) {
+        @if(this.taskForm.controls['dueDate'].invalid && (this.taskForm.controls['dueDate'].dirty ||
+        this.taskForm.controls['dueDate'].touched)) {
+        @if (this.taskForm.controls['dueDate'].errors) {
         <div class="error">
             Please enter a valid due date
         </div>
+        }
         }
     </div>
 

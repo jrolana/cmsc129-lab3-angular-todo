@@ -1,28 +1,12 @@
 {
   "tasks": [
     {
+      "id": "807d",
       "text": "Task 1",
-      "dueDate": "2025-03-12T00:40",
-      "priority": "2",
-      "isDone": false,
-      "dateAdded": "2025-03-12T12:39",
-      "id": "dfbc"
-    },
-    {
-      "text": "Changed",
-      "dueDate": "2025-04-04T00:49",
-      "priority": "3",
-      "isDone": false,
-      "dateAdded": "2025-03-12T12:42",
-      "id": "fbce"
-    },
-    {
-      "id": "09fd",
-      "text": "Task 2",
-      "dueDate": "2025-03-12T00:49",
+      "dueDate": "2025-03-13T02:48",
       "priority": "1",
       "isDone": false,
-      "dateAdded": "2025-03-12T12:49"
+      "dateAdded": "2025-03-13T02:48"
     }
   ]
 }
