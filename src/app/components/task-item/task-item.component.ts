@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../model/Task';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-import { faTimes, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { TaskFormComponent } from '../task-form/task-form.component';
 
@@ -14,7 +14,7 @@ import { TaskFormComponent } from '../task-form/task-form.component';
   styleUrl: './task-item.component.css'
 })
 export class TaskItemComponent {
-  faTimes = faTimes;
+  faTrash = faTrash;
   faPenToSquare = faPenToSquare;
   @Input({ required: true }) task: Task = {
     text: '',
