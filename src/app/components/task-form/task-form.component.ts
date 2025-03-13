@@ -42,7 +42,7 @@ export class TaskFormComponent {
       dueDate: new FormControl("", { nonNullable: true, validators: [Validators.required, this.dueDateValidator()] }),
       priority: new FormControl("1", { nonNullable: true }),
       isDone: new FormControl(false, { nonNullable: true }),
-      dateAdded: new FormControl(this.datePipe.transform(new Date(), "yyyy-MM-ddThh:mma")!,
+      dateAdded: new FormControl(this.datePipe.transform(new Date(), "yyyy-MM-ddThh:mm")!,
         { nonNullable: true }),
     })
   }
