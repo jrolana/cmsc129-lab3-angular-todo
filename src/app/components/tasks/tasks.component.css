@@ -7,3 +7,31 @@
 .hidden {
     display: none;
 }
+
+.label-item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.priority {
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+    font-size: medium;
+}
+
+.label {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    column-gap: 20px;
+    padding: 20px;
+}
+
+select {
+    width: 75%;
+    height: 40px;
+    margin: 5px;
+    padding: 3px 7px;
+    font-size: medium;
+}

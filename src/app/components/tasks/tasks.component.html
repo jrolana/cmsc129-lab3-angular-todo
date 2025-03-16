@@ -1,21 +1,35 @@
 <app-task-form (onAddTask)="addTask($event)"></app-task-form>
 
 @if (tasks.length > 0) {
-<div class="div form-control">
-    <label for="sortBy">Sort By </label>
-    <select name="sortBy" id="sortBy" [formControl]="sortBy" (click)="sortFunc(sortBy.value)">
-        <option value="-dueDate" [selected]="true">Due Date Desc</option>
-        <option value="+dueDate">Due Date Asc</option>
-        <option value="-priority">Priority Desc</option>
-        <option value="+priority">Priority Asc</option>
-        <option value="-dateAdded">Date Added Desc</option>
-        <option value="-dateAdded">Date Added Desc</option>
-    </select>
+<div class="label">
+    <div class="label-item">
+        <label for="sortBy">Sort By: </label>
+        <select name="sortBy" id="sortBy" [formControl]="sortBy" (click)="sortFunc(sortBy.value)">
+            <option value="-dueDate" [selected]="true">Due Date Desc</option>
+            <option value="+dueDate">Due Date Asc</option>
+            <option value="-priority">Priority Desc</option>
+            <option value="+priority">Priority Asc</option>
+            <option value="-dateAdded">Date Added Desc</option>
+            <option value="-dateAdded">Date Added Desc</option>
+        </select>
+    </div>
+
+    <div class="label-item">
+        <p>Priority: </p>
+        <div class="priority">
+            <fa-icon [icon]="faCircle" [style.color]="'red'"></fa-icon>
+            <p>High</p>
+            <fa-icon [icon]="faCircle" [style.color]="'green'"></fa-icon>
+            <p>Med</p>
+            <fa-icon [icon]="faCircle" [style.color]="'yellow'"></fa-icon>
+            <p>Low</p>
+        </div>
+    </div>
 </div>
 
 @for (task of tasks; track task) {
 <app-task-item [task]="task" (onDeleteTask)="deleteTask(task)" (onDoneTask)="toggleDone(task)"
-(onEditTask)="editTask($event)"></app-task-item>
+    (onEditTask)="editTask($event)"></app-task-item>
 }
 } @else {
 <div [ngClass]="showAddForm ? 'hidden': 'empty'">

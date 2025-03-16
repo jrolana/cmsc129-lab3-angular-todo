@@ -11,15 +11,20 @@ import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskItemComponent, TaskFormComponent, ReactiveFormsModule, CommonModule],
+  imports: [TaskItemComponent, TaskFormComponent, ReactiveFormsModule, CommonModule, FontAwesomeModule],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
 export class TasksComponent {
+  faCircle = faCircle;
+
   tasks: Task[] = TASKS;
   isDone: boolean = false;
   sortBy = new FormControl('', { nonNullable: true });

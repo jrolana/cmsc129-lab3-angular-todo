@@ -13,7 +13,7 @@
 }
 
 .task.mid {
-  border-left: 5px solid blue;
+  border-left: 5px solid green;
 }
 
 .task.low {
@@ -25,21 +25,25 @@
   justify-content: space-between;
 }
 
+.priority {
+  background-color: red;
+  max-width: fit-content;
+  padding: 2px;
+  border-radius: 5px;
+  color: white;
+  font-size: x-small;
+}
+
 .task.done {
   opacity: 0.5;
 
   h3 {
     text-decoration: line-through;
   }
-  
+
 }
 
 .task input {
   width: 20px;
   height: 20px;
-}
-
-.edit {
-  display: flex;
-  flex-direction: column;
 }
