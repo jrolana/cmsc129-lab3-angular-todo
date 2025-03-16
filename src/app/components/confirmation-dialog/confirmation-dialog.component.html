@@ -1,0 +1,7 @@
+<h3>Delete this task?</h3>
+<p>You can undo this action later.</p>
+<mat-dialog-actions>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button class="btn" [style.background-color]="'gray'" mat-dialog-close>Cancel</button>
+    <button class="btn" [style.background-color]="'red'" [mat-dialog-close]="true">Delete</button>
+</mat-dialog-actions>

@@ -85,3 +85,20 @@ body {
     flex: 2;
     height: 20px;
 }
+
+.confirmation-dialog {
+    .mat-mdc-dialog-container .mdc-dialog__surface {
+        margin: 30px auto;
+        overflow: auto;
+        padding: 30px;
+        border-radius: 5px;
+        max-width: fit-content;
+        display: flex;
+        align-items: center;
+    }
+}
+
+html,
+body {
+    height: 100%;
+}

@@ -8,6 +8,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UiService } from '../../services/ui.service';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tasks',
@@ -24,7 +27,7 @@ export class TasksComponent {
   showAddForm: boolean = false;
   subscription: Subscription;
 
-  constructor(private readonly taskService: TaskService, private readonly uiService: UiService) {
+  constructor(private readonly taskService: TaskService, private readonly uiService: UiService, public dialog: MatDialog, public snackbar: MatSnackBar) {
     this.taskService.getTasks().subscribe((tasks) =>
       this.tasks = tasks);
     this.subscription = this.uiService.onToggleAddTask().subscribe(value => this.showAddForm = value);
@@ -32,7 +35,24 @@ export class TasksComponent {
   }
 
   deleteTask(task: Task) {
-    this.taskService.deleteTask(task).subscribe(() => (this.tasks = this.tasks.filter((t) => t.id !== task.id)));
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '80%',
+      panelClass: 'confirmation-dialog'
+    });
+    dialogRef.afterClosed().subscribe((shouldDelete) => {
+      if (shouldDelete) {
+        this.taskService.deleteTask(task).subscribe(() => {
+          this.tasks = this.tasks.filter((t) => t.id !== task.id)
+
+          const snackbarRef = this.snackbar.open("Task was succesfully deleted", "Undo", {
+            horizontalPosition: 'right',
+          });
+          snackbarRef.onAction().subscribe(() => {
+            this.addTask(task);
+          })
+        });
+      }
+    });
   }
 
   editTask(task: Task) {

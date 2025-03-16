@@ -15,7 +15,7 @@
 
 @for (task of tasks; track task) {
 <app-task-item [task]="task" (onDeleteTask)="deleteTask(task)" (onDoneTask)="toggleDone(task)"
-    (onEditTask)="editTask($event)"></app-task-item>
+(onEditTask)="editTask($event)"></app-task-item>
 }
 } @else {
 <div [ngClass]="showAddForm ? 'hidden': 'empty'">

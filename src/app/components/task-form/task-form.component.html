@@ -17,7 +17,7 @@
 
     <div class="form-control">
         <label for="dueDate">Date & Time </label>
-        <input id="dueDate" type="datetime-local" formControlName="dueDate" min="{{getMinDate()}}">
+        <input id="dueDate" type="datetime-local" formControlName="dueDate" [min]="getMinDate()">
         @if(this.taskForm.controls['dueDate'].invalid && (this.taskForm.controls['dueDate'].dirty ||
         this.taskForm.controls['dueDate'].touched)) {
         @if (this.taskForm.controls['dueDate'].errors) {

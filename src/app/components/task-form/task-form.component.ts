@@ -42,7 +42,7 @@ export class TaskFormComponent {
       dueDate: new FormControl("", { nonNullable: true, validators: [Validators.required, this.dueDateValidator()] }),
       priority: new FormControl("1", { nonNullable: true }),
       isDone: new FormControl(false, { nonNullable: true }),
-      dateAdded: new FormControl(this.datePipe.transform(new Date(), "yyyy-MM-ddThh:mm")!,
+      dateAdded: new FormControl(this.datePipe.transform(new Date(), "yyyy-MM-ddTHH:mm")!,
         { nonNullable: true }),
     })
   }
@@ -50,13 +50,12 @@ export class TaskFormComponent {
   dueDateValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       let date = control.value;
-      const time = this.datePipe.transform(new Date(), 'a');
-      date += time;
 
-      const dateFormat = /\d{4}-(0[1-9]|1[1-2])-(0[1-9]|1\d|3[0-1])T\d{2}:\d{2}\w{2}/;
+      const dateFormat = /\d{4}-(0[1-9]|1[1-2])-(0[1-9]|1\d|3[0-1])T\d{2}:\d{2}/;
       let isValid = dateFormat.test(date);
 
-      if (date < this.getMinDate()!) {
+      date = new Date(date);
+      if (date.getTime() < this.getMinDate().getTime()) {
         isValid = false;
       }
 
@@ -72,8 +71,7 @@ export class TaskFormComponent {
     const date = new Date();
     date.setMinutes(date.getMinutes() - 60);
     date.setSeconds(0, 0);
-    const minDate = this.datePipe.transform(date, "yyyy-MM-ddThh:mma")
-    return minDate;
+    return date;
   }
 
   onSubmit() {
