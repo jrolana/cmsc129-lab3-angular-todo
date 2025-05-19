@@ -71,31 +71,28 @@ export class TaskFormComponent {
 
   dueDateValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      let date = control.value;
+      let inputDate = control.value;
 
-      const dateFormat =
-        /\d{4}-(0[1-9]|1[1-2])-(0[1-9]|1\d|3[0-1])T\d{2}:\d{2}/;
-      let isValid = dateFormat.test(date);
+      const parsedDate = new Date(inputDate);
 
-      date = new Date(date);
-      if (date.getTime() < this.getMinDate().getTime()) {
-        isValid = false;
+      if (isNaN(parsedDate.getTime())) {
+        return {
+          dueDate: { value: inputDate, message: 'Invalid date format' },
+        };
       }
 
-      return isValid
-        ? null
-        : {
-            dueDate: {
-              value: date,
-            },
-          };
+      const minDate = this.getMinDate();
+
+      if (parsedDate.getTime() < minDate.getTime()) {
+        return { dueDate: { value: inputDate, message: 'Date is too early' } };
+      }
+
+      return null;
     };
   }
 
   getMinDate() {
     const date = new Date();
-    date.setMinutes(date.getMinutes() - 60);
-    date.setSeconds(0, 0);
     return date;
   }
 
@@ -119,5 +116,6 @@ export class TaskFormComponent {
       : this.onAddTask.emit(newTask);
 
     this.taskForm.reset();
+    this.uiService.toggleShowTaskForm();
   }
 }

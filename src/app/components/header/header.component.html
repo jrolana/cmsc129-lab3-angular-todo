@@ -1,5 +1,8 @@
 <header>
-    <h1>To Do List</h1>
-    <app-button color="{{showAddForm ? 'orange': 'green'}}" text="{{showAddForm ? 'Close': 'Add'}}"
-        (btnClick)="toggleshowTaskForm()"></app-button>
+  <h1>Should Do</h1>
+  <app-button
+    color="{{ showAddForm ? 'orange' : 'green' }}"
+    text="{{ showAddForm ? 'Close' : 'Add' }}"
+    (btnClick)="toggleshowTaskForm()"
+  ></app-button>
 </header>

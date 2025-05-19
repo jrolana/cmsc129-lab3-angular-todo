@@ -5,8 +5,7 @@ import { CommonModule } from '@angular/common';
 import {
   faTrash,
   faPenToSquare,
-  faCalendar,
-  faBell,
+  faFontAwesomeFlag,
 } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { TaskFormComponent } from '../task-form/task-form.component';
@@ -21,8 +20,7 @@ import { TaskFormComponent } from '../task-form/task-form.component';
 export class TaskItemComponent {
   faTrash = faTrash;
   faPenToSquare = faPenToSquare;
-  faCalendar = faCalendar;
-  faBell = faBell;
+  faFontAwesomeFlag = faFontAwesomeFlag;
 
   @Input({ required: true }) task: Task = {
     text: '',
@@ -31,6 +29,7 @@ export class TaskItemComponent {
     isDone: false,
     dateAdded: '',
   };
+
   isDone: boolean = false;
 
   @Output() onDeleteTask = new EventEmitter<Task>();
@@ -39,24 +38,71 @@ export class TaskItemComponent {
 
   @Input() showEditForm: boolean = false;
 
-  constructor() {}
-
-  getPriority(task: Task) {
-    const prio: number = parseInt(task.priority);
-
-    switch (prio) {
-      case 1: {
-        return 'high';
+  getColorPriority(priority: string) {
+    switch (priority) {
+      case '1': {
+        return 'red';
       }
-      case 2: {
-        return 'mid';
+      case '2': {
+        return 'orange';
       }
-      case 3: {
-        return 'low';
+      case '3': {
+        return 'green';
       }
       default: {
         return;
       }
+    }
+  }
+
+  getPriority(priority: string) {
+    switch (priority) {
+      case '1': {
+        return 'High Priority';
+      }
+      case '2': {
+        return 'Medium Priority';
+      }
+      case '3': {
+        return 'Low Priority';
+      }
+      default: {
+        return;
+      }
+    }
+  }
+
+  isDueLater(dueDate: string) {
+    const due = new Date(dueDate);
+    const today = new Date();
+
+    if (due.getDate() > today.getDate()) {
+      return 'due-later';
+    } else {
+      return 'due';
+    }
+  }
+
+  formatDueDate(dueDate: string) {
+    const due = new Date(dueDate);
+    const today = new Date();
+
+    const isDueToday = due.getDate() === today.getDate();
+
+    if (isDueToday) {
+      return `Today, ${due.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      })}`;
+    } else {
+      return due.toLocaleString('en-US', {
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      });
     }
   }
 
@@ -73,7 +119,6 @@ export class TaskItemComponent {
   }
 
   onToggleDone(task: Task) {
-    task.isDone = this.isDone;
     this.onDoneTask.emit(task);
   }
 }

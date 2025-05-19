@@ -1,4 +1,4 @@
-<div class="task" [ngClass]="getPriority(task)" [class.done]="task.isDone">
+<div class="task" [class.done]="task.isDone">
   <input
     type="checkbox"
     [(ngModel)]="task.isDone"
@@ -6,9 +6,18 @@
   />
 
   <div>
-    <h3>{{ task.text }}</h3>
-    <div class="date">
-      <p class="due">Due: {{ task.dueDate | date : "MMM dd',' hh:mm a" }}</p>
+    <div class="row">
+      <p>{{ task.text }}</p>
+      <fa-icon
+        [icon]="faFontAwesomeFlag"
+        [ngStyle]="{ color: getColorPriority(task.priority) }"
+        [title]="getPriority(task.priority)"
+      ></fa-icon>
+    </div>
+    <div class="date row">
+      <p [ngClass]="isDueLater(task.dueDate)">
+        Due: {{ formatDueDate(task.dueDate) }}
+      </p>
       <p class="added">
         Added: {{ task.dateAdded | date : "MMM dd',' hh:mm a" }}
       </p>

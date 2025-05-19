@@ -8,25 +8,25 @@
       name="sortBy"
       id="sortBy"
       [formControl]="sortBy"
-      (click)="sortFunc(sortBy.value)"
+      (change)="sortFunc(sortBy.value)"
     >
-      <option value="-dueDate" [selected]="true">Due Date Desc</option>
-      <option value="+dueDate">Due Date Asc</option>
-      <option value="-priority">Priority Desc</option>
-      <option value="+priority">Priority Asc</option>
-      <option value="-dateAdded">Date Added Desc</option>
-      <option value="-dateAdded">Date Added Desc</option>
+      <option value="-dueDate">Due Date: Furthest</option>
+      <option value="+dueDate">Due Date: Closest</option>
+      <option value="-priority">Priority: Highest</option>
+      <option value="+priority">Priority: Lowest</option>
+      <option value="-dateAdded">Date Added: Newest</option>
+      <option value="+dateAdded">Date Added: Oldest</option>
     </select>
   </div>
 
   <div class="label-item">
     <p>Priority:</p>
     <div class="priority">
-      <fa-icon [icon]="faCircle" [style.color]="'red'"></fa-icon>
+      <fa-icon [icon]="faFontAwesomeFlag" [style.color]="'red'"></fa-icon>
       <p>High</p>
-      <fa-icon [icon]="faCircle" [style.color]="'green'"></fa-icon>
+      <fa-icon [icon]="faFontAwesomeFlag" [style.color]="'orange'"></fa-icon>
       <p>Med</p>
-      <fa-icon [icon]="faCircle" [style.color]="'yellow'"></fa-icon>
+      <fa-icon [icon]="faFontAwesomeFlag" [style.color]="'green'"></fa-icon>
       <p>Low</p>
     </div>
   </div>
