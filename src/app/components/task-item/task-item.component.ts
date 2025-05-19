@@ -2,21 +2,28 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../model/Task';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash,
+  faPenToSquare,
+  faCalendar,
+  faBell,
+} from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { TaskFormComponent } from '../task-form/task-form.component';
-
 
 @Component({
   selector: 'app-task-item',
   standalone: true,
   imports: [FontAwesomeModule, CommonModule, FormsModule, TaskFormComponent],
   templateUrl: './task-item.component.html',
-  styleUrl: './task-item.component.css'
+  styleUrl: './task-item.component.css',
 })
 export class TaskItemComponent {
   faTrash = faTrash;
   faPenToSquare = faPenToSquare;
+  faCalendar = faCalendar;
+  faBell = faBell;
+
   @Input({ required: true }) task: Task = {
     text: '',
     dueDate: '',
@@ -32,21 +39,20 @@ export class TaskItemComponent {
 
   @Input() showEditForm: boolean = false;
 
-  constructor() {
-  }
+  constructor() {}
 
   getPriority(task: Task) {
     const prio: number = parseInt(task.priority);
 
     switch (prio) {
       case 1: {
-        return "high";
+        return 'high';
       }
       case 2: {
-        return "mid";
+        return 'mid';
       }
       case 3: {
-        return "low";
+        return 'low';
       }
       default: {
         return;

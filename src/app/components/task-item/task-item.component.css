@@ -1,37 +1,29 @@
 .task {
-  background: #f4f4f4;
-  margin: 5px;
-  padding: 10px 20px;
+  background: #f9f9f9;
+  margin: 10px 5px;
+  padding: 12px 10px 12px 20px;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 0.5fr 5fr 0.5fr;
+  grid-template-columns: 0.3fr 5fr 0.25fr;
   align-items: center;
+  justify-content: center;
 }
 
 .task.high {
-  border-left: 5px solid red;
+  border-left: 7px solid red;
 }
 
 .task.mid {
-  border-left: 5px solid green;
+  border-left: 7px solid green;
 }
 
 .task.low {
-  border-left: 5px solid yellow;
+  border-left: 7px solid yellow;
 }
 
 .task h3 {
   display: flex;
   justify-content: space-between;
-}
-
-.priority {
-  background-color: red;
-  max-width: fit-content;
-  padding: 2px;
-  border-radius: 5px;
-  color: white;
-  font-size: x-small;
 }
 
 .task.done {
@@ -40,10 +32,38 @@
   h3 {
     text-decoration: line-through;
   }
-
 }
 
 .task input {
   width: 20px;
   height: 20px;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+
+  p.due {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    color: red;
+    background-color: #f8d7da;
+  }
+
+  p.added {
+    border: 1px solid gray;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    color: #333;
+  }
+}
+
+.edit:hover {
+  color: green;
+}
+
+.delete:hover {
+  color: red;
 }

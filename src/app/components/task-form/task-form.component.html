@@ -1,42 +1,46 @@
 @if (showAddForm || isEditForm) {
 <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="add-form">
+  <div class="form-control">
+    <label for="text">Text </label>
+    <input
+      id="text"
+      type="text"
+      formControlName="text"
+      placeholder="{{ isEditForm ? textVal : 'Please enter task' }}"
+    />
+    @if(this.taskForm.controls['text'].invalid &&
+    (this.taskForm.controls['text'].dirty ||
+    this.taskForm.controls['text'].touched)) { @if
+    (this.taskForm.controls['text'].errors) {
+    <div class="error">Please enter a task</div>
+    } }
+  </div>
 
-    <div class="form-control">
-        <label for="text">Text </label>
-        <input id="text" type="text" formControlName="text"
-            placeholder="{{isEditForm ? textVal : 'Please enter task'}}">
-        @if(this.taskForm.controls['text'].invalid && (this.taskForm.controls['text'].dirty ||
-        this.taskForm.controls['text'].touched)) {
-        @if (this.taskForm.controls['text'].errors) {
-        <div class="error">
-            Please enter a task
-        </div>
-        }
-        }
-    </div>
+  <div class="form-control">
+    <label for="dueDate">Date & Time </label>
+    <input
+      id="dueDate"
+      type="datetime-local"
+      formControlName="dueDate"
+      [min]="getMinDate().toString()"
+    />
+    @if(this.taskForm.controls['dueDate'].invalid &&
+    (this.taskForm.controls['dueDate'].dirty ||
+    this.taskForm.controls['dueDate'].touched)) { @if
+    (this.taskForm.controls['dueDate'].errors) {
+    <div class="error">Please enter a valid due date</div>
+    } }
+  </div>
 
-    <div class="form-control">
-        <label for="dueDate">Date & Time </label>
-        <input id="dueDate" type="datetime-local" formControlName="dueDate" [min]="getMinDate()">
-        @if(this.taskForm.controls['dueDate'].invalid && (this.taskForm.controls['dueDate'].dirty ||
-        this.taskForm.controls['dueDate'].touched)) {
-        @if (this.taskForm.controls['dueDate'].errors) {
-        <div class="error">
-            Please enter a valid due date
-        </div>
-        }
-        }
-    </div>
+  <div class="div form-control">
+    <label for="priority">Priority </label>
+    <select name="priority" id="priority" formControlName="priority">
+      <option value="1">High</option>
+      <option value="2">Mid</option>
+      <option value="3">Low</option>
+    </select>
+  </div>
 
-    <div class="div form-control">
-        <label for="priority">Priority </label>
-        <select name="priority" id="priority" formControlName="priority">
-            <option value="1" [selected]="true">High</option>
-            <option value="2">Mid</option>
-            <option value="3">Low</option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-block">Save Task</button>
+  <button type="submit" class="btn btn-block">Save Task</button>
 </form>
 }
