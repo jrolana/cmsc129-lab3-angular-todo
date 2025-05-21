@@ -9,6 +9,7 @@
       id="sortBy"
       [formControl]="sortBy"
       (change)="sortFunc(sortBy.value)"
+      (click)="sortFunc(sortBy.value)"
     >
       <option value="-dueDate">Due Date: Furthest</option>
       <option value="+dueDate">Due Date: Closest</option>

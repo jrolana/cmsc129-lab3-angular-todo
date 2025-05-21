@@ -32,7 +32,7 @@ export class TasksComponent {
 
   tasks: Task[] = TASKS;
   isDone: boolean = false;
-  sortBy = new FormControl('-dateAdded', { nonNullable: true });
+  sortBy = new FormControl('+dueDate', { nonNullable: true });
 
   showAddForm: boolean = false;
   subscription: Subscription;
@@ -95,6 +95,10 @@ export class TasksComponent {
 
   toggleDone(task: Task) {
     this.taskService.editTask(task).subscribe(() => {
+      if (!task.isDone) {
+        return;
+      }
+
       for (let i = 0; i < this.tasks.length; i++) {
         if (this.tasks[i].id == task.id) {
           this.tasks.splice(i, 1);
